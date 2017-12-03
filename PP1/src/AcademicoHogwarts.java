@@ -26,7 +26,7 @@ public class AcademicoHogwarts {
         Scanner n = new Scanner(System.in);
         System.out.print("Elija una materia del listado de materias: ");
         numero = n.nextInt();
-        while(numero<0 || numero>Materias.length || MateriasTomadas.contains(Materias[numero-1])){
+        while(numero<=0 || numero>Materias.length || MateriasTomadas.contains(Materias[numero-1])){
             Scanner nn = new Scanner(System.in);
             System.out.print("Elija una materia valida del listado de materias: ");
             numero = nn.nextInt();
@@ -44,7 +44,7 @@ public class AcademicoHogwarts {
         Scanner p = new Scanner(System.in);
         System.out.print("Elija un profesor del listado de profesores: ");
         numero1 = p.nextInt();
-        while(numero1<0 || numero1>Profesores.length){
+        while(numero1<=0 || numero1>Profesores.length){
             Scanner pp = new Scanner(System.in);
             System.out.print("Elija un profesor valido del listado de profesores: ");
             numero1 = pp.nextInt();
@@ -93,7 +93,54 @@ public class AcademicoHogwarts {
     }
     
     
-    public void CrearProfesor(){}
+    public void CrearProfesor(){
+        System.out.println("/** CREAR PROFESOR **/");
+        String ingreso,confirmacion;
+        int brujamago;
+        BrujasMagos a = new BrujasMagos();
+        a.Crear();
+        
+        Scanner fi = new Scanner(System.in);
+        System.out.print("Fecha de Ingreso: ");
+        ingreso = fi.nextLine();
+        
+        System.out.println("Tipos de Magos/Brujas");
+        String tipos[] = {"Animago","Metamorfomago","Estandar"};
+        for(int i = 0;i<tipos.length;i++){
+            System.out.println((i+1)+"."+tipos[i]);
+        }
+        Scanner bm = new Scanner(System.in);
+        System.out.print("Elija el tipo de Bruja/mago que es: ");
+        brujamago = bm.nextInt();
+        while(brujamago<=0 || brujamago>tipos.length){
+            Scanner bm2 = new Scanner(System.in);
+            System.out.print("Elija una opcion valida: ");
+            brujamago = bm2.nextInt();
+        }
+        if (brujamago == 1){
+            a.tipo = "A";
+            Animago ani = new Animago();
+            a.animal = ani.Animal();
+        }
+        else{ if (brujamago == 2){
+            a.tipo = "M";
+            Metamorfomago meta = new Metamorfomago();
+            a.pocion = meta.Pocion();
+        }
+        else{
+            a.tipo = "N";
+            Normal normal = new Normal();
+            a.deporte= normal.Deporte();
+        }
+        }
+        Scanner co = new Scanner(System.in);
+        System.out.println("Desea guardar los datos? S/N: ");
+        confirmacion = co.nextLine();
+        confirmacion = confirmacion.toUpperCase();
+        if ("S".equals(confirmacion)){
+            System.out.println("Sus datos se han guardado correctamente");
+        }
+    }
     public void CrearEstudiante(){}
     public void VerHorariosPlanificados(){}
     public void ListadoDeEstudiantes(){}
