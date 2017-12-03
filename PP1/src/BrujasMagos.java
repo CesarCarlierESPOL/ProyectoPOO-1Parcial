@@ -23,21 +23,9 @@ public class BrujasMagos {
     public int getEdad(){
         return edad;
     }
-    public void Crear(){
-        Scanner n = new Scanner(System.in);
-        System.out.print("Ingrese Nombre: ");
-        nombre = n.nextLine();
-
-        Scanner a = new Scanner(System.in);
-        System.out.print("Ingrese Apellidos: ");
-        apellido = a.nextLine();
-        
-        Scanner e = new Scanner(System.in);
-        System.out.print("Ingrese Edad: ");
-        edad = e.nextInt();
-        
-        Scanner v = new Scanner(System.in);
-        System.out.print("Varita: ");
-        varita = v.nextLine();
-    }
+    public BrujasMagos(String nombre,String apellido,String varita,int edad){
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.varita=varita;
+        this.edad=edad;
 }
