@@ -8,7 +8,7 @@
  *
  * @author Miguel
  */
-public abstract class BrujasMagos {
+public class BrujasMagos {
     private String nombre, apellido, varita;
     private int edad;
     public String getNombre(){
