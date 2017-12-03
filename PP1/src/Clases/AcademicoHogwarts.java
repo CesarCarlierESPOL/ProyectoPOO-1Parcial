@@ -6,6 +6,7 @@ package Clases;
  * and open the template in the editor.
  */
 import java.util.*;
+import java.io.*;
 /**
  *
  * @author User
@@ -14,6 +15,75 @@ public class AcademicoHogwarts {
     ArrayList<String> MateriasTomadas = new ArrayList();
     ArrayList<String> Dias = new ArrayList();
     ArrayList<String> Horas = new ArrayList();
+    
+    public static void main(String[] args){
+        FileReader fr = null;
+        BufferedReader br = null;
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Bienvenido al sistema académico de Hogwarts");
+        ArrayList<String> datos=new ArrayList<String>();
+        String rolusuario="";
+        try {
+            InputStream inputstream = AcademicoHogwarts.class.getResourceAsStream("/recursos/usuarios.txt");
+            InputStreamReader inputreader = new InputStreamReader(inputstream);
+            br = new BufferedReader(inputreader);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                datos.add(linea);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        boolean usuariocorrecto=false;
+        while(usuariocorrecto==false){
+            int i;
+            System.out.println("Ingrese su usuario:");
+            String usuario=sc.nextLine();
+            System.out.println("Ingrese su clave:");
+            String clave=sc.nextLine();
+        
+            for(i=0;i<datos.size();i++){
+                String[] linea;
+                linea=datos.get(i).split(",");
+                if(linea[0].equals(usuario)||linea[1].equals(clave)){
+                    System.out.println("Ingreso exitoso");
+                    rolusuario=linea[4];
+                    usuariocorrecto=true;
+                }
+            }
+            if(usuariocorrecto==false){
+                System.out.println("Los datos ingresados son incorrectos. Ingrese de nuevo.");
+            }
+        }
+        boolean deseaSalir=false;
+        if (usuariocorrecto=true){
+            while (deseaSalir==false){
+                if (rolusuario.equals("planificador")){
+                    System.out.println("Planificador");
+                    System.out.println("1. Crear Curso");
+                    System.out.println("2. Crear Profesor");
+                    System.out.println("3. Crear Estudiante");
+                    System.out.println("4. Ver horarios");
+                    System.out.println("5. Listado de estudiantes");
+                    System.out.println("6. Cerrar Sesión");
+                    System.out.println("Ingrese su opción:");
+                    int opcion=sc.nextInt();
+                    if (opcion==1){
+                        
+                    }
+                }
+            }
+        }
+    }
     public void CrearCurso(){
         int numero,numero1,capacidad;
         String horario,confirmacion,dia;
