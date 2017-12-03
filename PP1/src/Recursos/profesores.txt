@@ -1,0 +1,3 @@
+Severus,Snape,45,cedro,14/04/2015,A,hechizo1,null,null
+Nimphadora,Tonks,30,pino,12/07/2012,M,null,null,poción multijugos,null
+Albus,Dumbledore,178,sauco,18/10/1900,N,null,null,null,quidditch
