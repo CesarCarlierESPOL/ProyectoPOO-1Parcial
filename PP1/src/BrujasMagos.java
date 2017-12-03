@@ -9,8 +9,8 @@
  * @author Miguel
  */
 public class BrujasMagos {
-    private String nombre, apellido, varita;
-    private int edad;
+    public String nombre, apellido, varita,tipo,animal,pocion,deporte;
+    public int edad;
     public String getNombre(){
         return nombre;
     }
@@ -22,5 +22,22 @@ public class BrujasMagos {
     }
     public int getEdad(){
         return edad;
+    }
+    public void Crear(){
+        Scanner n = new Scanner(System.in);
+        System.out.print("Ingrese Nombre: ");
+        nombre = n.nextLine();
+
+        Scanner a = new Scanner(System.in);
+        System.out.print("Ingrese Apellidos: ");
+        apellido = a.nextLine();
+        
+        Scanner e = new Scanner(System.in);
+        System.out.print("Ingrese Edad: ");
+        edad = e.nextInt();
+        
+        Scanner v = new Scanner(System.in);
+        System.out.print("Varita: ");
+        varita = v.nextLine();
     }
 }
