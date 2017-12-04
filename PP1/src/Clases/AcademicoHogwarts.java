@@ -283,9 +283,9 @@ public class AcademicoHogwarts {
         System.out.println("Ingrese Edad");
         edad=sc.nextInt();
         System.out.println("Varita");
-        varita=sc.nextLine();
+        varita=sc.next();
         System.out.println("Fecha de Ingreso:");
-        fecha=sc.nextLine();
+        fecha=sc.next();
         System.out.println("");
         System.out.println("Tipos de Magos/Brujas");
         System.out.println("1.Animago");
@@ -302,30 +302,30 @@ public class AcademicoHogwarts {
                 System.out.println("En que clase de animal se transforma:");
                 animal=sc.next();
                 System.out.println("Que hechizo usa?");
-                hechizo=sc.nextLine();
+                hechizo=sc.next();
             }
             else if (opcion==2){
                 opcionCorrecta=true;
                 tipo="M";
                 System.out.println("Que pocion usa?");
-                pocion=sc.nextLine();
+                pocion=sc.next();
             }
             else if (opcion==3){
                 opcionCorrecta=true;
                 tipo="N";
                 System.out.println("Que deporte le gusta?");
-                deporte=sc.nextLine();
+                deporte=sc.next();
             }
             else{System.out.println("Ingrese una opcion valida");}
         }
         if (opcionCorrecta==true){
             String guardado="";
             System.out.println("Desea guardar los datos?");
-            guardado=sc.nextLine();
+            guardado=sc.next();
             if (guardado.equals("S")){
                 try {
                     FileWriter f = new FileWriter(new File("src/recursos/profesores.txt"),true);
-                    f.append(nombre+","+apellido+","+edad+","+varita+","+fecha+","+tipo+","+animal+","+hechizo+","+pocion+","+deporte);
+                    f.append("\n"+nombre+","+apellido+","+edad+","+varita+","+fecha+","+tipo+","+animal+","+hechizo+","+pocion+","+deporte);
                     f.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -337,12 +337,8 @@ public class AcademicoHogwarts {
     }
     public static void CrearEstudiante(){
         System.out.println(/** CREAR ESTUDIANTES**/);
-        String nombre,apellido,varita,fecha,tipo;
+        String nombre,apellido,varita,casa,tipo;
         int opcion,edad;
-        String pocion=null;
-        String deporte=null;
-        String animal=null;
-        String hechizo=null;
         Scanner sc=new Scanner(System.in);
         System.out.println("Ingrese Nombre");
         nombre=sc.nextLine();
@@ -350,10 +346,10 @@ public class AcademicoHogwarts {
         apellido=sc.nextLine();
         System.out.println("Ingrese Edad");
         edad=sc.nextInt();
-        System.out.println("Varita");
-        varita=sc.nextLine();
-        System.out.println("Fecha de Ingreso:");
-        fecha=sc.nextLine();
+        System.out.println("Varita:");
+        varita=sc.next();
+        System.out.println("Casa:");
+        casa=sc.next();
         System.out.println("");
         System.out.println("Tipos de Magos/Brujas");
         System.out.println("1.Animago");
@@ -367,33 +363,25 @@ public class AcademicoHogwarts {
             if (opcion==1){
                 opcionCorrecta=true;
                 tipo="A";
-                System.out.println("En que clase de animal se transforma:");
-                animal=sc.next();
-                System.out.println("Que hechizo usa?");
-                hechizo=sc.nextLine();
             }
             else if (opcion==2){
                 opcionCorrecta=true;
                 tipo="M";
-                System.out.println("Que pocion usa?");
-                pocion=sc.nextLine();
             }
             else if (opcion==3){
                 opcionCorrecta=true;
                 tipo="N";
-                System.out.println("Que deporte le gusta?");
-                deporte=sc.nextLine();
             }
             else{System.out.println("Ingrese una opcion valida");}
         }
         if (opcionCorrecta==true){
             String guardado="";
             System.out.println("Desea guardar los datos?");
-            guardado=sc.nextLine();
+            guardado=sc.next();
             if (guardado.equals("S")){
                 try {
                     FileWriter f = new FileWriter(new File("src/recursos/estudiantes.txt"),true);
-                    f.append(nombre+","+apellido+","+edad+","+varita+","+fecha+","+tipo+","+animal+","+hechizo+","+pocion+","+deporte);
+                    f.append("\n"+nombre+","+apellido+","+edad+","+varita+","+casa+","+tipo);
                     f.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -491,6 +479,65 @@ public class AcademicoHogwarts {
         else{System.out.println("No hay horarios planificados para esa materia.");}
     }
     public static void verListado(){
+        FileReader fr = null;
+        BufferedReader br = null;
+        FileWriter fw=null;
+        BufferedWriter bw=null;
+        ArrayList<String[]> estudiantes=new ArrayList<String[]>();
+        try {
+            InputStream inputstream = AcademicoHogwarts.class.getResourceAsStream("/recursos/estudiantes.txt");
+            InputStreamReader inputreader = new InputStreamReader(inputstream);
+            br = new BufferedReader(inputreader);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                estudiantes.add(linea.split(","));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        fr = null;
+        br = null;
+        ArrayList<String[]> registros=new ArrayList<String[]>();
+        try {
+            InputStream inputstream = AcademicoHogwarts.class.getResourceAsStream("/recursos/registro.txt");
+            InputStreamReader inputreader = new InputStreamReader(inputstream);
+            br = new BufferedReader(inputreader);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                registros.add(linea.split(","));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        int i;
+        for(i=0;i<estudiantes.size();i++){
+            
+        }
+        
+        
+        
+        System.out.println("/**LISTADO DE ESTUDIANTES**/");
+        System.out.println("1.Edad");
+        System.out.println("2.Nombre");
+        System.out.println("3.Número de materias registradas");
         
     }
     public static void verCursos(){
@@ -664,7 +711,7 @@ public class AcademicoHogwarts {
         if(existeMateria==true){
             System.out.println("El horario de "+materiaElegida+" es "+cursosExistentes.get(i)[2]+","+cursosExistentes.get(i)[3]);
             System.out.println("Desea registrarse?");
-            registrarse=sc.nextLine();
+            registrarse=sc.next();
             DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now=LocalDateTime.now();
             String fecha=dtf.format(now);
@@ -676,7 +723,7 @@ public class AcademicoHogwarts {
             if (registrarse.equals("S")){
                 try {
                     FileWriter f = new FileWriter(new File("src/recursos/registro.txt"),true);
-                    f.append(fecha+","+nombreUsuario+","+apellidoUsuario+","+materiaElegida+","+tipoRegistro);
+                    f.append("\n"+fecha+","+nombreUsuario+","+apellidoUsuario+","+materiaElegida+","+tipoRegistro);
                     f.close();
                 } catch (Exception e) {
                     e.printStackTrace();
