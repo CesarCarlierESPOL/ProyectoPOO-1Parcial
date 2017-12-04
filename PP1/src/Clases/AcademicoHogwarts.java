@@ -7,6 +7,8 @@ package Clases;
  */
 import java.util.*;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 /**
  *
  * @author User
@@ -52,7 +54,7 @@ public class AcademicoHogwarts {
             for(i=0;i<datos.size();i++){
                 String[] linea;
                 linea=datos.get(i).split(",");
-                if(linea[0].equals(usuario)||linea[1].equals(clave)){
+                if(linea[0].equals(usuario)&&linea[1].equals(clave)){
                     System.out.println("Ingreso exitoso");
                     rolusuario=linea[4];
                     nombreUsuario=linea[2];
@@ -252,27 +254,15 @@ public class AcademicoHogwarts {
                 System.out.println("   Profesor: "+profesorElegido);
                 System.out.println("   Capacidad: "+capacidadElegida);
                 System.out.println("   Horario: "+horarioElegido);
-                String nuevocurso=(materiaElegida+","+profesorElegido+","+diaElegido+","+horarioElegido+","+capacidadElegida+"\n");
-                String filename="/recursos/curso.txt";
-                FileWriter fichero = null;
-                PrintWriter pw = null;
+                String nuevocurso=("\n"+materiaElegida+","+profesorElegido+","+diaElegido+","+horarioElegido+","+capacidadElegida);
+                
                 try {
-                    fichero = new FileWriter(filename, true);
-                    pw = new PrintWriter(fichero);
-                    pw.println(nuevocurso);
-                    System.out.println("Sus datos se han guardado correctamente");
+                    FileWriter f = new FileWriter(new File("src/recursos/curso.txt"),true);
+                    f.append(nuevocurso);
+                    f.close();
                 } catch (Exception e) {
                     e.printStackTrace();
-                } finally {
-                    try{
-                        if (null != fichero) {
-                            fichero.close();
-                        }
-                    } catch (Exception e2) {
-                    e2.printStackTrace();
-                    }
-                }
-                
+                }                 
             }
             else{System.out.println("No se guardaran los datos");}
         }
@@ -333,8 +323,16 @@ public class AcademicoHogwarts {
             System.out.println("Desea guardar los datos?");
             guardado=sc.nextLine();
             if (guardado.equals("S")){
+                try {
+                    FileWriter f = new FileWriter(new File("src/recursos/profesores.txt"),true);
+                    f.append(nombre+","+apellido+","+edad+","+varita+","+fecha+","+tipo+","+animal+","+hechizo+","+pocion+","+deporte);
+                    f.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Sus datos se han guardado");
             }
+            else{System.out.println("No se guardaron datos");}
         }
     }
     public static void CrearEstudiante(){
@@ -393,8 +391,16 @@ public class AcademicoHogwarts {
             System.out.println("Desea guardar los datos?");
             guardado=sc.nextLine();
             if (guardado.equals("S")){
+                try {
+                    FileWriter f = new FileWriter(new File("src/recursos/estudiantes.txt"),true);
+                    f.append(nombre+","+apellido+","+edad+","+varita+","+fecha+","+tipo+","+animal+","+hechizo+","+pocion+","+deporte);
+                    f.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Sus datos se han guardado");
             }
+            else{System.out.println("No se guardaron datos");}
         }
     }
     public static void verHorarios(){
@@ -659,8 +665,23 @@ public class AcademicoHogwarts {
             System.out.println("El horario de "+materiaElegida+" es "+cursosExistentes.get(i)[2]+","+cursosExistentes.get(i)[3]);
             System.out.println("Desea registrarse?");
             registrarse=sc.nextLine();
+            DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDateTime now=LocalDateTime.now();
+            String fecha=dtf.format(now);
+            String tipoRegistro="";
+            if((edadUsuario<15)&&((materiaElegida.equals("Defensa contra las artes oscuras"))||(materiaElegida.equals("Pociones"))||(materiaElegida.equals("Adivinación")))){
+                tipoRegistro="E";
+            }
+            else{tipoRegistro="N";}
             if (registrarse.equals("S")){
-                System.out.println("Se ha registrado en la materia");
+                try {
+                    FileWriter f = new FileWriter(new File("src/recursos/registro.txt"),true);
+                    f.append(fecha+","+nombreUsuario+","+apellidoUsuario+","+materiaElegida+","+tipoRegistro);
+                    f.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Sus datos se han guardado");
             }
             else{System.out.println("No se guardo ningun dato");}
         }

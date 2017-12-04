@@ -11,5 +11,5 @@ package Clases;
  * @author Miguel
  */
 public enum NombresClases {
-    Pociones, Defensacontralasartesoscuras,Adivinacion, Astronomia, HistoriadelaMagia, Herbologia, Encantamientos, Vuelo
+    Pociones,DefensaContraLasArtesOscuras,Adivinacion, Astronomia, HistoriadelaMagia, Herbologia, Encantamientos, Vuelo
 }
