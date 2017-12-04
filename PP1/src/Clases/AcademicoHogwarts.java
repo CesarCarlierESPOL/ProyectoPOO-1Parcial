@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author User
  */
-public class AcademicoHogwarts {
+public class AcademicoHogwarts{
     public static String nombreUsuario,apellidoUsuario,tipoUsuario,varitaUsuario;
     public static int edadUsuario;
     public static void main(String[] args){
@@ -527,9 +527,17 @@ public class AcademicoHogwarts {
                 e2.printStackTrace();
             }
         }
-        int i;
+        ArrayList<EstudianteComp> arreglo =new ArrayList<EstudianteComp>();
+        int i,j;
         for(i=0;i<estudiantes.size();i++){
-            
+            int materias=0;
+            String nombreEstudiante=estudiantes.get(i)[0]+estudiantes.get(i)[1];
+            for(j=0;j<registros.size();j++){
+                if(nombreEstudiante.equals(registros.get(j)[1]+registros.get(j)[2])){
+                    materias+=1;
+                }
+            }
+            arreglo.add(new EstudianteComp(estudiantes.get(i)[0],estudiantes.get(i)[1],estudiantes.get(i)[3],Integer.valueOf(estudiantes.get(i)[2]),estudiantes.get(i)[4],materias));
         }
         
         
@@ -538,7 +546,39 @@ public class AcademicoHogwarts {
         System.out.println("1.Edad");
         System.out.println("2.Nombre");
         System.out.println("3.Número de materias registradas");
-        
+        boolean opcionCorrecta=false;
+        while (opcionCorrecta==false){
+            System.out.println("Elija una manera de ordenar: ");
+            Scanner sc=new Scanner(System.in);
+            int opcion1=sc.nextInt();
+            if (opcion1==1){
+                Collections.sort(arreglo, new OrdenarPorEdad());
+                System.out.println("por Edad");
+                for(int k=0;k<arreglo.size();k++){
+                    System.out.println(arreglo.get(k));
+                }
+                opcionCorrecta=true;
+            }
+            else if (opcion1==2){
+                Collections.sort(arreglo, new OrdenarPorNombre());
+                System.out.println("por Nombre");
+                for(int k=0;k<arreglo.size();k++){
+                    System.out.println(arreglo.get(k));
+                }
+                opcionCorrecta=true;
+            }
+            else if (opcion1==3){
+                Collections.sort(arreglo, new OrdenarPorMaterias());
+                System.out.println("por Materias");
+                for(int k=0;k<arreglo.size();k++){
+                    System.out.println(arreglo.get(k));
+                }
+                opcionCorrecta=true;
+            }
+            else{
+                System.out.println("Ingrese una opción válida");
+            }
+        }
     }
     public static void verCursos(){
         FileReader fr = null;
