@@ -22,6 +22,7 @@ public class AcademicoHogwarts {
         Scanner sc=new Scanner(System.in);
         System.out.println("Bienvenido al sistema académico de Hogwarts");
         ArrayList<String> datos=new ArrayList<String>();
+        ArrayList<String> cursos=new ArrayList<String>();
         String rolusuario="";
         try {
             InputStream inputstream = AcademicoHogwarts.class.getResourceAsStream("/recursos/usuarios.txt");
@@ -78,13 +79,106 @@ public class AcademicoHogwarts {
                     System.out.println("Ingrese su opción:");
                     int opcion=sc.nextInt();
                     if (opcion==1){
+                      
+                    }
+                    if (opcion==2){
                         
                     }
+                    if (opcion==3){
+                        
+                    }
+                    if (opcion==4){
+                        
+                    }
+                    if (opcion==5){
+                        
+                    }
+                    if (opcion==6){
+                        System.out.println("Ha cerrado sesión.");
+                        deseaSalir=true;
+                    }
+                    else{
+                        System.out.println("Ingrese una opción válida.");
+                    }
+                }
+                else if (rolusuario.equals("estudiante")){
+                    System.out.println("Estudiante");
+                    System.out.println("1. Ver Cursos Planificados");
+                    System.out.println("2. Registro");
+                    System.out.println("3. Descripcion de Vuelo");
+                    System.out.println("4. Cerrar Sesión");
+                    int opc=sc.nextInt();
+                    if (opc==1){
+                        int i = sc.nextInt();
+                        FileReader fc = null;
+                        BufferedReader bc= null;
+                        try {
+                            InputStream inputstream = AcademicoHogwarts.class.getResourceAsStream("/recursos/curso.txt");
+                            InputStreamReader inputreader = new InputStreamReader(inputstream);
+                            bc = new BufferedReader(inputreader);
+                            String carac;
+                            while ((carac = bc.readLine()) != null) {
+                                cursos.add(carac);
+                            }
+                        }
+                        catch (Exception c) {
+                            c.printStackTrace();
+                        } 
+                        finally {
+                            try {
+                                if (null != fc) {
+                                    fc.close();
+                                }
+                            } 
+                            catch (Exception c2) {
+                                c2.printStackTrace();
+                            }
+                        }
+                        for (String m: cursos){
+                            String o =m.split(",")[0];
+                            String l=m.split(",")[1];
+                            String n=m.split(",")[2];
+                            String p=m.split(",")[3];
+                            System.out.print("CURSOS PLANIFICADOS");
+                            System.out.println(o);
+                            System.out.println("Escriba el nombre de la materia: ");
+                            String x = sc.next();
+                            if (x.toLowerCase() == o.toLowerCase()){
+                                System.out.println("Materia: "+o);
+                                System.out.println("Horario: "+l+","+n);
+                                System.out.println("Cupo maximo: "+p);
+                            }                            
+                        }                        
+                    }
+                    if (opc==2){
+                        System.out.print("REGISTROS");
+                        System.out.println("Escriba el nombre de la materia: ");
+                    }
+                    if (opc==3){
+                        System.out.print("Ingrese el tipo de mago que es: ");
+                        String v = sc.next();
+                        if (v.toLowerCase()=="normal"){
+                            System.out.println("Usted es un mago Normal, para volar necesita una Nimbus 2000");
+                        }
+                        if (v.toLowerCase()=="metamorfomago"){
+                            System.out.println("Usted es un Metamorfomago, puede volar usando solamente su poder");
+                        }
+                        if (v.toLowerCase()=="animago"){
+                            System.out.println("Usted es un Animago, puede volar con la ayuda de su varita");
+                        }
+                    }
+                    if (opc==4){
+                        System.out.println("Ha cerrado sesión.");
+                        deseaSalir=true;
+                    }
+                    else{
+                        System.out.println("Ingrese una opción válida.");
+                    }
+                }
                 }
             }
         }
-    }
-    public void CrearCurso(){
+        public void CrearCurso(){
         int numero,numero1,capacidad;
         String horario,confirmacion,dia;
         boolean disponible = true;
